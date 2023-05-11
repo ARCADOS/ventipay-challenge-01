@@ -23,15 +23,30 @@
  */
 
 const express = require('express');
+const cors = require('cors')
+const app = express();
 
-const server = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
-server.get('/payment_methods', (req, res) => {
-  res.status(404).send({
-    status: 200
-  });
-});
+// routers
+const paymentRouter = require('./routes/paymentRoute')
 
-server.listen({ port: process.env.PORT || 80 }, () => {
+
+// restarts data
+const {createData} = require('./constants/generateData')
+
+// port
+const port = process.env.PORT || 80
+//const port = 4534
+
+
+
+app.use('/v1', paymentRouter)
+
+
+app.listen({ port: port }, () => {
+  createData()
   console.log(`🚀 API Server instance ready`);
-});
+})
