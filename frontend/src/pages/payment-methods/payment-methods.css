@@ -1,0 +1,16 @@
+.simple-cards {
+    display: flex;
+    justify-content: center;
+
+}
+
+.card {
+    margin: 10px;
+}
+
+.table-container{
+    margin-top: 10px;
+    display: 'flex';
+    justify-content: 'center';
+    width: '100%';
+  }

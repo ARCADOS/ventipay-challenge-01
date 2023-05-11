@@ -10,41 +10,17 @@
  */
 
 import './App.css';
-import { React, useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import PaymentMethods from './pages/payment-methods'
 
 function App() {
-  let paymentMethods = fetch({
-    method: 'get',
-    url: 'http://127.0.0.1/payment_methods',
-  });
-
-  const [paymentMethodsCount, setPaymentMethodsCount] = useState();
-  const [isLoading, setIsLoading] = useState();
-
-  useEffect(() => {
-    setPaymentMethodsCount(0);
-  });
-
   return (
-    <div className="App">
-    <h1>Payment Methods.</h1>
-    <h2>Total: ({paymentMethodsCount})</h2>
-    <h2>Total ending in an even number: ({ paymentMethodsCountendingineven }) </h2>
-
-      <hr />
-      {
-        isLoading && <p>Loading...</p>
-      }
-      <ul>
-        {
-          paymentMethods.map(o => {
-            return (
-              <li>Brand: {o.brand}, Last 4: {o.last4}, Created At: {o.created_at}</li>
-            );
-          })
-        }
-      </ul>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<PaymentMethods/>} />
+      </Routes>
+    </Router>
   );
 }
 
